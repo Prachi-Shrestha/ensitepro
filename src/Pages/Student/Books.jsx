@@ -1,9 +1,23 @@
+import React, { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom';
 import { Box, Button, Container, Grid, MenuItem } from '@mui/material'
-import React from 'react'
 import ComponentHeader from '../../Components/Common/ComponentHeader'
 import SelectInput from '../../Components/Common/SelectInput'
 
 const Books = () => {
+    const [authenticated, setauthenticated] = useState(localStorage.getItem("authenticated"));
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("authenticated");
+    if (loggedInUser) {
+      setauthenticated(loggedInUser);
+    }
+  }, []);
+
+if(!authenticated){
+  return <Navigate replace to ='/'></Navigate>
+}
+else{
+
   return (
     <div>
         <ComponentHeader title='Books'/>
@@ -20,12 +34,13 @@ const Books = () => {
                     </SelectInput>
                 </Grid>
             </Grid>
-            <Box textAlign='center'>
+            <Box textAlign='center' paddingTop= '40px'>
               <Button variant="contained">Search</Button>
             </Box>
         </Container>
     </div>
   )
+}
 }
 
 export default Books

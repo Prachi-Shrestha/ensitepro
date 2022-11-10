@@ -34,7 +34,7 @@ else{
                     </SelectInput>
                 </Grid>
             </Grid>
-            <Box textAlign='center'>
+            <Box textAlign='center' paddingTop= '40px'>
               <Button variant="contained">Search</Button>
             </Box>
         </Container>   
