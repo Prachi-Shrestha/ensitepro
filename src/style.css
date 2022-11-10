@@ -1,0 +1,72 @@
+body{
+    background: #F1F1F1;
+}
+.highlights .swiper-button-prev {
+    display: none;
+}
+.highlights .swiper-button-next:after {
+    font-size: 1rem;
+    color: #272727;
+}
+.bg-white{
+    background-color: #fff !important;
+    color: #000 !important;
+}
+.image-overlay{
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.css-dasnyc-MuiImageListItemBar-title{
+    font-size: 0.9rem !important;
+    text-overflow: unset !important;
+    white-space: break-spaces !important;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: -0.165px;
+}
+.resource-button{
+    background: #F1F1F1 !important;
+    border-radius: 24px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+}
+.article .swiper-button-next, .article .swiper-button-prev {
+    width: 28px;
+    height: 28px;
+    color: white;
+    background: rgba(1, 229, 240, 0.7);
+    border-radius: 50%;
+}
+.article .swiper-button-next:after, .article .swiper-button-prev:after {
+    font-size: 10px;
+}
+.search-button:focus + .search-input{
+    display: none;
+}
+.header-icon {
+    padding: 4px !important;
+    color: black !important;
+}
+.product .css-10hburv-MuiTypography-root{
+    font-size: 0.7rem;
+}
+.input-field{
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.165px;
+    color: #7A7E9D;
+}
+.sidebar a{
+    width: 100%;
+    color: #272727;
+    text-decoration: none;
+}
+.css-1kh1mwg a:first-child{
+    width: 50%;
+}
