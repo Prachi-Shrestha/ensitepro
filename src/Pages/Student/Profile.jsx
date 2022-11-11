@@ -1,5 +1,6 @@
+import React, { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Avatar, Button, Container, Divider, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
-import React from 'react'
 import { Link as RouterLink } from 'react-router-dom';
 import ComponentHeader from '../../Components/Common/ComponentHeader'
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
@@ -24,6 +25,29 @@ const cardStyles ={
 };
 
 const Profile = () => {
+  const navigate = useNavigate();
+
+  const [authenticated, setauthenticated] = useState(localStorage.getItem("authenticated"));
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("authenticated");
+    if (loggedInUser) {
+      setauthenticated(loggedInUser);
+    }
+  }, []);
+
+  const logout = (e) => {
+    e.preventDefault();
+    console.log('Logout');
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/");  
+}
+
+if(!authenticated){
+  return <Navigate replace to ='/'></Navigate>
+}
+else{
+
   return (
     <div>
         <ComponentHeader title='Profile'/>
@@ -60,7 +84,7 @@ const Profile = () => {
                   <ListItemIcon>
                     <ExitToAppIcon/>
                   </ListItemIcon>
-                  <ListItemText> Logout </ListItemText>
+                  <ListItemText onClick={logout}> Logout </ListItemText>
                 </ListItemButton>
             </ListItem>
             </List>
@@ -68,6 +92,7 @@ const Profile = () => {
         </Container>
     </div>
   )
+}
 }
 
 export default Profile

@@ -1,9 +1,23 @@
+import React, { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom';
 import { Box, Button, Container, Grid, MenuItem, TextField } from '@mui/material'
-import React from 'react'
 import ComponentHeader from '../../Components/Common/ComponentHeader'
 import SelectInput from '../../Components/Common/SelectInput'
 
 const PreviousEducation = () => {
+  const [authenticated, setauthenticated] = useState(localStorage.getItem("authenticated"));
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("authenticated");
+    if (loggedInUser) {
+      setauthenticated(loggedInUser);
+    }
+  }, []);
+
+if(!authenticated){
+  return <Navigate replace to ='/'></Navigate>
+}
+else{
+
   return (
     <div>
         <ComponentHeader title='Previous Education'/>
@@ -102,6 +116,7 @@ const PreviousEducation = () => {
         </Container>
     </div>
   )
+}
 }
 
 export default PreviousEducation

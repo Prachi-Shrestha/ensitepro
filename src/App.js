@@ -19,6 +19,7 @@ import FeePaid from './Pages/Student/FeePaid';
 import CreditFee from './Pages/Student/CreditFee';
 import Books from './Pages/Student/Books';
 import PreviousEducation from './Pages/Student/PreviousEducation';
+import TeacherOnlineClass from './Pages/Teacher/TeacherOnlineClass';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path='/creditfee' element={<CreditFee/>}></Route>
         <Route path='/gradesheet' element={<GradeSheet/>}></Route> 
         <Route path='/teacher' element={<Teacher/>}></Route>
+        <Route path='/teacheronlineclass' element={<TeacherOnlineClass/>}></Route>
         <Route path='/news' element={<NewsDetail/>}></Route>     
       </Routes>    
     </div>
