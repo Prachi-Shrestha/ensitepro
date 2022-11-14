@@ -21,7 +21,6 @@ const cardStyles ={
 const Information = () => {
 
   const [data, setData] = useState([])
-  // const [program, setProgram] = useState([])
 
   useEffect(() => {
     console.log(process.env);
@@ -39,23 +38,7 @@ const Information = () => {
       setData(null);
     })
   },[]);
-  // useEffect(() => {
-  //   axios.get(
-  //     `${process.env.REACT_APP_base_URL}/api/Setup/ProgramMaster?id=${data.program}`,
-  //     {
-  //       headers: {
-  //         'Authorization': 'Bearer ' + localStorage.getItem("token")
-  //       }
-  //     }
-  //   )
-  //   .then(response => {
-  //     setProgram(response.data);
-  //     console.log(response.data);
-  //   })
-  //   .catch(error => {
-  //     setProgram(null);
-  //   })
-  // },[data]);
+  
   
   return (
     <div>
@@ -72,7 +55,7 @@ const Information = () => {
             sx={{marginBottom:'20px'}}
           >
             <div>
-              <Typography variant="body2" fontWeight='600' gutterBottom>Class : {data.classId}</Typography>
+              <Typography variant="body2" fontWeight='600' gutterBottom>Class : {JSON.parse(localStorage.getItem("class")).name}</Typography>
             </div> 
             <div>
               <Typography variant="body2" fontWeight='600' gutterBottom>Year : 20{data.academicYear}</Typography> 
@@ -101,10 +84,10 @@ const Information = () => {
             <Grid item xs={7}>
               <Typography variant="body2" gutterBottom>: {data.id}</Typography> 
               <Typography variant="body2" gutterBottom>: {data.rollNo}</Typography> 
-              <Typography variant="body2" gutterBottom>: {data.program}</Typography> 
-              <Typography variant="body2" gutterBottom>: {data.subjectGroup}</Typography> 
+              <Typography variant="body2" gutterBottom>: {JSON.parse(localStorage.getItem("program")).name}</Typography> 
+              <Typography variant="body2" gutterBottom>: {JSON.parse(localStorage.getItem("groupName")).name}</Typography> 
               <Typography variant="body2" gutterBottom>: {data.email}</Typography> 
-              <Typography variant="body2" gutterBottom>: {data.gender === 'F' ? "Female" : "Male"}</Typography> 
+              <Typography variant="body2" gutterBottom>: {data.gender === 'F' ? "Female" : data.gender === 'M' ? "Male" : ""}</Typography> 
               <Typography variant="body2" gutterBottom>: {data.mobileNo}</Typography> 
               <Typography variant="body2" gutterBottom>: {data.alternativeMobile}</Typography> 
               <Typography variant="body2" gutterBottom>: {data.dateOfBirth}</Typography> 

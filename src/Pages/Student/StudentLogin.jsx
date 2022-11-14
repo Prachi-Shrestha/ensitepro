@@ -10,14 +10,9 @@ import { Button, FormControl, Grid, InputLabel, TextField, Typography } from '@m
 import axios from 'axios';
 import LoginIcon from '@mui/icons-material/Login';
 import { useNavigate } from 'react-router-dom';
-// import { useState } from 'react';
 
 function StudentLogin() {
   const navigate = useNavigate();
-
-  // const [authenticated, setauthenticated] = useState(
-  //   localStorage.getItem(localStorage.getItem("authenticated") || false)
-  // );
 
     const [values, setValues] = React.useState({
         Username: '',
@@ -34,16 +29,96 @@ function StudentLogin() {
           }
       )
         .then(response => {
-          console.log(response);
           localStorage.setItem("authenticated", true);
+          localStorage.setItem("class", response.data.classId);
+          localStorage.setItem("section", response.data.session);
+          localStorage.setItem("academicYear", response.data.academicYear);
           localStorage.setItem("token", response.data.token);
           navigate("/student");
-          console.log(response);
+          console.log(response.data);
+          getSubject(response.data);
         })
         .catch(error => {
           console.log(error);
         })
     }
+    function getSubject(data){
+      axios.get(
+        `${process.env.REACT_APP_base_URL}/api/Setup/SubjectGroup`,
+        {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
+          }
+        }
+      )
+      .then(response => {
+        const groupData = response.data
+        localStorage.setItem("subjectGroup", JSON.stringify(groupData));
+        groupData.map((value) => {
+          // setProgram(response.data.name)
+          if(value.id === data.subjectGroup){
+            let obj = {};
+            obj['id'] = data.subjectGroup;
+            obj['name'] = value.groupName;
+            localStorage.setItem("groupName",JSON.stringify(obj));
+          }
+        })
+      })
+      .catch(error => {
+        localStorage.setItem("groupName",null);
+      })
+  
+      axios.get(
+        `${process.env.REACT_APP_base_URL}/api/Setup/ProgramMaster`,
+        {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
+          }
+        }
+      )
+      .then(response => {
+        const programData = response.data
+        console.log(programData);
+        localStorage.setItem("programs", JSON.stringify(programData));
+        programData.map((value) => {
+          // setProgram(response.data.name)
+          if(value.id === data.program){
+            let obj = {};
+            obj['id'] = data.program;
+            obj['name'] = value.name;
+            localStorage.setItem("program", JSON.stringify(obj));
+          }
+        })
+      })
+      .catch(error => {
+        localStorage.setItem("program", null);
+      })
+
+      axios.get(
+        `${process.env.REACT_APP_base_URL}/api/Setup/ClassMaster`,
+        {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
+          }
+        }
+      )
+      .then(response => {
+        const classData = response.data
+        localStorage.setItem("classes", JSON.stringify(classData));
+        classData.map((value) => {
+          if(value.id === data.classId){
+            let obj = {};
+            obj['id'] = data.classId;
+            obj['name'] = value.name;
+            localStorage.setItem("class",JSON.stringify(obj));
+          }
+        })
+      })
+      .catch(error => {
+        localStorage.setItem("class",null);
+      })
+    }
+
       const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
@@ -109,7 +184,7 @@ function StudentLogin() {
         </FormControl>
         </Grid>
         <Typography variant='subtitle2' color='#ADA4A5'> Forgot your password? </Typography>
-        <Button variant="contained" onClick={loginApi} 
+        <Button variant="contained" type='submit'
         sx={{
             position: 'relative',
             width: '50ch',

@@ -6,7 +6,7 @@ import Assignment from '../../Components/Content/Assignment';
 import BasicCard from '../../Components/Common/BasicCard';
 import ComponentHeader from '../../Components/Common/ComponentHeader';
 
-const Homework = () => {
+const Homework = (props) => {
   const getHeader = () => (
     <Typography fontSize='16px' fontWeight='600' fontFamily='Open Sans' color='#226CE0'>
       Homework Title
@@ -38,36 +38,6 @@ else{
           header={getHeader()}
           content={getContent()}
         />
-        </Grid>
-        <Grid item xs={12} md={6}>
-        <BasicCard
-          header={getHeader()}
-          content={getContent()}
-        />
-        </Grid>
-        <Grid item xs={12} md={6}>
-        <BasicCard
-          header={getHeader()}
-          content={getContent()}
-        />
-        </Grid>
-        <Grid item xs={12} md={6}>
-        <BasicCard
-          header={getHeader()}
-          content={getContent()}
-        />
-        </Grid>
-        <Grid item xs={12} md={6}>
-        <BasicCard
-          header={getHeader()}
-          content={getContent()}
-        />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <BasicCard
-          header={getHeader()}
-          content={getContent()}
-          />
         </Grid>
     </Grid>
     </Container>

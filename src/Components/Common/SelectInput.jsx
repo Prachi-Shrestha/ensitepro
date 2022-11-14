@@ -1,19 +1,20 @@
-import React, { useState }  from 'react'
+import React  from 'react'
 import { FormControl, InputLabel, Select } from '@mui/material'
 
 function SelectInput(props) {
-  const [age, setAge] = useState('');
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    props.setValue(event.target.value);
   };
 
   return (
-    <FormControl fullWidth className='input-field'>
+    <FormControl fullWidth className='input-field' 
+    // disabled={props.disabled ? true : false}
+    >
         <InputLabel>{props.label}</InputLabel>
         <Select
             id={props.id}
-            value={age}
+            value={props.value}
             label={props.label}
             onChange={handleChange}
         >
