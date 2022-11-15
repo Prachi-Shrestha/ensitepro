@@ -137,8 +137,6 @@ else{
                 }
               />
               </Grid>
-            // <Homework titile='Online Class' videoTitle={value.videoTitle} chapter={value.courseChapter} link={value.youtubeLink}
-            // teacher={value.teacher.firstName + value.teacher.lastName}/>
             )
             :
             <h1>No Data</h1>

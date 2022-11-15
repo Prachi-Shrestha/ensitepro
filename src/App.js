@@ -15,6 +15,11 @@ import Profile from './Pages/Student/Profile';
 import HomePage from './Pages/HomePage';
 import StudentLogin from './Pages/Student/StudentLogin';
 import TeacherLogin from './Pages/Teacher/TeacherLogin';
+import FeePaid from './Pages/Student/FeePaid';
+import CreditFee from './Pages/Student/CreditFee';
+import Books from './Pages/Student/Books';
+import PreviousEducation from './Pages/Student/PreviousEducation';
+import TeacherOnlineClass from './Pages/Teacher/TeacherOnlineClass';
 
 function App() {
   return (
@@ -28,13 +33,18 @@ function App() {
         <Route path='/homework' element={<Homework/>}></Route>
         <Route path='/onlineclass' element={<OnlineClass/>}></Route>
         <Route path='/notes' element={<Notes/>}></Route>
+        <Route path='/books' element={<Books/>}></Route>
         <Route path='/routine' element={<Routine/>}></Route>
         <Route path='/attendance' element={<Attendance/>}></Route>
         <Route path='/transportation' element={<Transportation/>}></Route>      
         <Route path='/coursevideo' element={<CourseVideo/>}></Route>
+        <Route path='/previouseducation' element={<PreviousEducation/>}></Route>
         <Route path='/information' element={<Information/>}></Route>
+        <Route path='/feepaid' element={<FeePaid/>}></Route>
+        <Route path='/creditfee' element={<CreditFee/>}></Route>
         <Route path='/gradesheet' element={<GradeSheet/>}></Route> 
         <Route path='/teacher' element={<Teacher/>}></Route>
+        <Route path='/teacheronlineclass' element={<TeacherOnlineClass/>}></Route>
         <Route path='/news' element={<NewsDetail/>}></Route>     
       </Routes>    
     </div>

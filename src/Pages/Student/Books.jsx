@@ -4,7 +4,7 @@ import { Box, Button, Container, Grid, MenuItem } from '@mui/material'
 import ComponentHeader from '../../Components/Common/ComponentHeader'
 import SelectInput from '../../Components/Common/SelectInput'
 
-function Transportation() {
+const Books = () => {
     const [authenticated, setauthenticated] = useState(localStorage.getItem("authenticated"));
   useEffect(() => {
     const loggedInUser = localStorage.getItem("authenticated");
@@ -20,16 +20,16 @@ else{
 
   return (
     <div>
-        <ComponentHeader title='Transportation' />
+        <ComponentHeader title='Books'/>
         <Container>
             <Grid container spacing={2} sx={{my: '0.5rem'}}>
                 <Grid item xs={12} md={6}>
-                    <SelectInput label='Select Vehicle' id='select-vehicle'>
-                        <MenuItem value={10}>Twen</MenuItem>
+                    <SelectInput label='Select Class' id='select-class-books'>
+                        <MenuItem value={10}>Ten</MenuItem>
                     </SelectInput>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <SelectInput label='Select Location' id='select-location'>
+                    <SelectInput label='Select Subject' id='select-subject-books'>
                         <MenuItem value={10}>Twen</MenuItem>
                     </SelectInput>
                 </Grid>
@@ -37,9 +37,10 @@ else{
             <Box textAlign='center' paddingTop= '40px'>
               <Button variant="contained">Search</Button>
             </Box>
-        </Container>   
+        </Container>
     </div>
   )
 }
 }
-export default Transportation
+
+export default Books

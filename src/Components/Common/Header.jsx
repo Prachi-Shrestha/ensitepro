@@ -14,6 +14,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
 const Search = styled("div")(({ theme }) => ({
@@ -62,7 +63,7 @@ const Header = () => {
 
   return (
     <div>
-      <AppBar position="static" className="bg-white">
+      <AppBar position="static" className="bg-white" elevation={0}>
         <Container maxWidth="xl">
         <Toolbar disableGutters sx={{display: 'flex', justifyContent: 'space-between'}}>
             <Avatar src="https://avatars.githubusercontent.com/u/86892846?v=4" alt="" />

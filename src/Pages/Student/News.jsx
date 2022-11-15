@@ -1,9 +1,9 @@
-import React from 'react'
-// import { Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom';
 import { Container, Grid, ImageListItemBar } from '@mui/material'
 import { Box } from '@mui/system'
 import { Link } from 'react-router-dom'
-// import gamenews2 from '../../img/Frame 71.png'
+import gamenews2 from '../../img/Frame 71.png'
 
 function News() {
  

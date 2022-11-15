@@ -14,7 +14,7 @@ function ComponentHeader(props) {
 
   return (
     <div>
-        <AppBar position="static" className="bg-white">
+        <AppBar position="static" className="bg-white" elevation={0}>
         <Toolbar>
           <IconButton
             size="large"

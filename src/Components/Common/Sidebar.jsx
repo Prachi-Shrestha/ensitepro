@@ -119,12 +119,14 @@ function Sidebar(props) {
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
+              <Link to='/books'>
               <ListItemButton>
                 <ListItemIcon>
                   <img src={books} alt="books-icon"   />
                 </ListItemIcon>
                 <ListItemText>Books</ListItemText>
               </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
@@ -181,12 +183,14 @@ function Sidebar(props) {
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
+              <Link to='/previouseducation'>
               <ListItemButton>
                 <ListItemIcon>
                   <img src={education} alt="education-icon"   />
                 </ListItemIcon>
                 <ListItemText>Previous Education</ListItemText>
               </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
@@ -201,21 +205,25 @@ function Sidebar(props) {
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
+              <Link to='/feepaid'>
               <ListItemButton>
                 <ListItemIcon>
                   <img src={paid} alt="paid-icon"   />
                 </ListItemIcon>
                 <ListItemText>Fee Paid</ListItemText>
               </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
+              <Link to='/creditfee'>
               <ListItemButton>
                 <ListItemIcon>
                   <img src={credit} alt="credit-icon"   />
                 </ListItemIcon>
                 <ListItemText>Credit Fee</ListItemText>
               </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
