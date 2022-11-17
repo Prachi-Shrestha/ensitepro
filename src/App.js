@@ -20,6 +20,7 @@ import CreditFee from './Pages/Student/CreditFee';
 import Books from './Pages/Student/Books';
 import PreviousEducation from './Pages/Student/PreviousEducation';
 import TeacherOnlineClass from './Pages/Teacher/TeacherOnlineClass';
+import TeacherHomework from './Pages/Teacher/TeacherHomework';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path='/teacher' element={<Teacher/>}></Route>
         <Route path='/teacheronlineclass' element={<TeacherOnlineClass/>}></Route>
         <Route path='/news' element={<NewsDetail/>}></Route>     
+        <Route path='/teacherhomework' element={<TeacherHomework/>}></Route>     
       </Routes>    
     </div>
   );

@@ -2,20 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import { Box, Container, Typography } from '@mui/material';
-import Assignment from '../../Components/Content/Assignment';
 import BasicCard from '../../Components/Common/BasicCard';
 import ComponentHeader from '../../Components/Common/ComponentHeader';
 import axios from 'axios';
 
 const Homework = (props) => {
-  const getHeader = () => (
-    <Typography fontSize='16px' fontWeight='600' fontFamily='Open Sans' color='#226CE0'>
-      Homework Title
-    </Typography>
-  );
-  const getContent = () => (
-    <Assignment/>
-  );
 
   const [authenticated, setauthenticated] = useState(localStorage.getItem("authenticated"));
   const [hwData, setHwData] = useState('')
@@ -49,8 +40,9 @@ else{
     <div>
     <ComponentHeader title='HomeWork'/>
     <Container>
+    {hwData &&
     <Grid container columnSpacing={{ xs: 1, md: 1 }} sx={{my: '0.5rem'}}>
-      {hwData &&  hwData.length > 0 ? 
+      {hwData.length > 0 ? 
         hwData.map((value) => 
         <Grid item xs={12} md={6}>
           <BasicCard
@@ -86,6 +78,7 @@ else{
         <h1>No Data</h1>
       }
     </Grid>
+    }
     </Container>
     </div>
   );

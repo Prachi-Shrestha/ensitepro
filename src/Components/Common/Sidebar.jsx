@@ -77,12 +77,14 @@ function Sidebar(props) {
         <Divider />
         <List sx={{mx: '1rem'}}>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <img src={home} alt="home-icon"   />
-                </ListItemIcon>
-                <ListItemText>Home</ListItemText>
-              </ListItemButton>
+              <Link to='/student'>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <img src={home} alt="home-icon"   />
+                  </ListItemIcon>
+                  <ListItemText>Home</ListItemText>
+                </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>   

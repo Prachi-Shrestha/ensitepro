@@ -70,3 +70,6 @@ body{
 .css-1kh1mwg a:first-child{
     width: 50%;
 }
+.inputFile .css-wgpvh3-MuiInputBase-root-MuiInput-root:before, .inputFile .css-wgpvh3-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled):before {
+    border-bottom: none;
+}

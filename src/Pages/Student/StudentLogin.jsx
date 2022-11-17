@@ -29,14 +29,19 @@ function StudentLogin() {
           }
       )
         .then(response => {
-          localStorage.setItem("authenticated", true);
-          localStorage.setItem("class", response.data.classId);
-          localStorage.setItem("section", response.data.session);
-          localStorage.setItem("academicYear", response.data.academicYear);
-          localStorage.setItem("token", response.data.token);
-          navigate("/student");
-          console.log(response.data);
-          getSubject(response.data);
+          if(response.data.error){
+            alert(response.data.error)
+          }
+          else{
+            localStorage.setItem("authenticated", true);
+            localStorage.setItem("class", response.data.classId);
+            localStorage.setItem("section", response.data.session);
+            localStorage.setItem("academicYear", response.data.academicYear);
+            localStorage.setItem("token", response.data.token);
+            navigate("/student");
+            console.log(response);
+            getSubject(response.data);
+          }
         })
         .catch(error => {
           console.log(error);
@@ -153,6 +158,7 @@ function StudentLogin() {
           InputProps={{
             startAdornment: <InputAdornment position="start"><EmailIcon/></InputAdornment>,
           }}
+          required
         />
         <FormControl variant="outlined" sx={{ m: 1, width: '50ch' }}>
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
@@ -180,6 +186,7 @@ function StudentLogin() {
                 </InputAdornment>
                 }
                 label="Password"
+                required
             />
         </FormControl>
         </Grid>

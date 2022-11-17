@@ -1,4 +1,4 @@
-import { Box, Button, Grid, MenuItem, TextField, Typography } from '@mui/material';
+import { Box, Button, FormControl, Grid, Input, MenuItem, TextField, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import BasicCard from '../../Components/Common/BasicCard';
 
-const TeacherOnlineClass = () => {
+const TeacherHomework = () => {
     const [data, setData] = useState('')
     const [year, setYear] = useState('');
     const [yearData, setYearData] = useState([]);
@@ -18,9 +18,10 @@ const TeacherOnlineClass = () => {
     const [classId, setClassId] = useState('');
     const [subject, setSubject] = useState('');
     const [values, setValues] = React.useState({
-        link: '',
-        startTime: '',
-        endTime: '',
+        homeWork: '',
+        homeworkDate: '',
+        homeworkTitle: '',
+        photo: '',
     });
 
     const handleChange = (prop) => (event) => {
@@ -76,21 +77,50 @@ const TeacherOnlineClass = () => {
         .catch(error => {
         setSubjectData(null);
         })
-
     }, [program, classId, group]);
+
+    useEffect(() => {
+        axios.get(
+        `${process.env.REACT_APP_base_URL}/api/Setup/SubjectGroup/ClassGroupWise?program=${program}&classId=${classId}&subjectGroup=${group}`,
+        {headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
+        }}
+        )
+        .then(response => {
+        setSubjectData(response.data);
+        })
+        .catch(error => {
+        setSubjectData(null);
+        })
+
+        axios.get(
+        `${process.env.REACT_APP_base_URL}/api/TeacherPanel/TeachersHomework?academicYear=${year}&classId=${classId}&program=${program}&subjectGroup=${group}`,
+        {headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
+        }}
+        )
+        .then(response => {
+            setData(response.data);
+        })
+        .catch(error => {
+            setData(null);
+        })
+
+    }, [program, classId, group, subject]);
 
     const addData = (e) => {
         e.preventDefault()
         axios.post(
-            `${process.env.REACT_APP_base_URL}api/Student/OnlineClass`,
+            `${process.env.REACT_APP_base_URL}/api/TeacherPanel/TeachersHomework`,
             {
                 'academicYear': {year}, 
                 'subjectGroup': {group},
                 'program': {program}, 
                 'classId': {classId}, 
-                'link': values.link, 
-                'startTime': values.startTime,
-                'endTime': values.endTime,   
+                'homeWork': values.homeWork, 
+                'homeworkDate': values.homeworkDate,
+                'homeworkTitle': values.homeworkTitle,   
+                'photo': values.photo,   
             },
             {   headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("token")
@@ -111,7 +141,7 @@ const TeacherOnlineClass = () => {
     const classData = JSON.parse(localStorage.getItem("classes"));
   return (
     <div>
-        <ComponentHeader title='Online Class'/>
+        <ComponentHeader title="Teacher's Homework"/>
         <Container>
             <form onSubmit={addData}>
                 <Grid container spacing={2} sx={{my: '0.5rem'}}>
@@ -163,36 +193,42 @@ const TeacherOnlineClass = () => {
                     <Grid item xs={6} md={6}>
                         <TextField
                             fullWidth
-                            label="Enter Start Time"
-                            id="outlined-starttime"
+                            label="Enter Date"
+                            id="outlined-homeworkDate"
                             sx={{backgroundColor: '#fff'}}
-                            value={values.startTime}
-                            onChange={handleChange('startTime')}
+                            value={values.homeworkDate}
+                            onChange={handleChange('homeworkDate')}
                         />
                     </Grid>  
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={12} md={12}>
                         <TextField
                             fullWidth
-                            id="outlined-endtime"
-                            label="Enter End Time"
+                            id="outlined-homeworkTitle"
+                            label="Enter Title"
                             sx={{backgroundColor: '#fff'}}
-                            value={values.endTime}
-                            onChange={handleChange('endTime')}
+                            value={values.homeworkTitle}
+                            onChange={handleChange('homeworkTitle')}
                         />
                     </Grid>
-                    <Grid item xs={7} md={10}>
+                    <Grid item xs={12} md={12}>
                         <TextField
                             fullWidth
-                            id="outlined-link"
-                            value={values.link}
-                            label="Enter Link"
+                            id="outlined-Questions"
+                            value={values.homeWork}
+                            label="Questions"
+                            multiline
+                            rows={9}
                             sx={{backgroundColor: '#fff'}}
-                            onChange={handleChange('link')}
+                            onChange={handleChange('homeWork')}
                         />
-                    </Grid>
-                    <Grid item xs={5} md={2} sx={{marginTop: '10px'}}>
-                        <Button variant='contained' sx={{textTransform: 'none', backgroundColor: '#009E19'}}> <AddIcon/> Create Link </Button>
-                    </Grid>              
+                        <FormControl className='inputFile' sx={{marginTop: '10px'}}>
+                            Upload PDF/Image
+                            <Input type='file' sx={{marginTop: '10px'}} 
+                                value={values.photo}
+                                onChange={handleChange('photo')} 
+                            />
+                        </FormControl>
+                    </Grid>          
                 </Grid>
                 <Box textAlign='center' paddingTop= '40px'>
                     <Button variant='contained' sx={{textTransform: 'none'}} type='submit'> Save </Button>
@@ -206,13 +242,13 @@ const TeacherOnlineClass = () => {
                   <BasicCard
                     header={
                       <Typography fontSize='16px' fontWeight='600' fontFamily='Open Sans' color='#226CE0'>
-                        {value.subject}
+                        {value.homeworkTitle}
                       </Typography>
                     }
                     content={
                       <Box marginTop='-15px'>
                         <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
-                          Link: <a href={value.link}>{value.link}</a>
+                          homeWork: {value.homeWork}
                         </Typography>
                         <Box display='flex' justifyContent= 'space-between'>                          
                           <Box>
@@ -220,15 +256,16 @@ const TeacherOnlineClass = () => {
                               Teacher: {value.teacher} 
                             </Typography>
                             <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
-                              Start Time: {value.startTime}
+                              Start Time: {value.homeworkDate}
                             </Typography>
                           </Box>
                           <Box alignItems='end' display='flex'>
                             <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
-                              End Time: {value.endTime}
+                              End Time: {value.homeworkTitle}
                             </Typography>
                           </Box>
                         </Box>
+                        <a href={value.fileUrl}>{value.fileUrl}</a>
                       </Box>
                     }
                   />
@@ -245,4 +282,4 @@ const TeacherOnlineClass = () => {
   )
 }
 
-export default TeacherOnlineClass
+export default TeacherHomework

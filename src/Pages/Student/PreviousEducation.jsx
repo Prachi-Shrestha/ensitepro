@@ -3,14 +3,47 @@ import { Navigate } from 'react-router-dom';
 import { Box, Button, Container, Grid, MenuItem, TextField } from '@mui/material'
 import ComponentHeader from '../../Components/Common/ComponentHeader'
 import SelectInput from '../../Components/Common/SelectInput'
+import axios from 'axios';
 
 const PreviousEducation = () => {
+  const [regId, setRegId] = useState('')
+  const [data, setData] = useState('')
+  const [edu, setEdu] = useState('')
   const [authenticated, setauthenticated] = useState(localStorage.getItem("authenticated"));
   useEffect(() => {
     const loggedInUser = localStorage.getItem("authenticated");
     if (loggedInUser) {
       setauthenticated(loggedInUser);
     }
+
+    axios.get(
+      `${process.env.REACT_APP_base_URL}/rest/Student/Information`,
+      {headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token")
+      }}
+    )
+    .then(response => {
+      setRegId(response.data.id);
+    })
+    .catch(error => {
+      setRegId(null);
+    })
+
+    
+      axios.get(
+        `${process.env.REACT_APP_base_URL}/rest/Student/PreviousEducation`,
+        {headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token")
+        }}
+      )
+      .then(response => {
+        setData(response.data);
+        console.log(response.data);
+      })
+      .catch(error => {
+        setData(null);
+      })
+
   }, []);
 
 if(!authenticated){
@@ -29,11 +62,17 @@ else{
                   label="Username"
                   id="outlined-username"
                   sx={{backgroundColor: '#fff'}}
+                  value={regId}
+                  disabled
                 />
                 </Grid>
                 <Grid item xs={6} md={6}>
-                    <SelectInput label='Education' id='select-education'>
-                        <MenuItem value={10}>Twen</MenuItem>
+                    <SelectInput label='Education' id='select-education' value={edu} setValue={setEdu}>
+                        <MenuItem value='1'>SLC/SEE</MenuItem>
+                        <MenuItem value='2'>Plus Two</MenuItem>
+                        <MenuItem value='21'>PCL</MenuItem>
+                        <MenuItem value='3'>Bachelor</MenuItem>
+                        <MenuItem value='4'>Master</MenuItem>
                     </SelectInput>
                 </Grid>
                 <Grid item xs={6} md={6}>

@@ -65,7 +65,7 @@ else{
     <div>
         <ComponentHeader title='Course Video' />
         <Container>
-        <form onSubmit={getData}>
+          <form onSubmit={getData}>
             <Grid container spacing={2} sx={{my: '0.5rem'}}>
                 <Grid item xs={12} md={6}>
                     <SelectInput label='Select Group' id='select-group' setValue={setGroup} value={group}>
@@ -101,47 +101,48 @@ else{
                                 <MenuItem value={value.id}>{value.name}</MenuItem>
                             )
                         }
-                        {console.log(subject)}
                     </SelectInput>
                 </Grid>
             </Grid>
             <Box textAlign='center'>
                 <Button variant="contained" type='submit'>Search</Button>
             </Box>
-        </form>
-        <Grid container columnSpacing={{ xs: 1, md: 1 }} sx={{my: '0.5rem'}}>
-        {data &&  data.length > 0 ? 
-          data.map((value) => 
-            <Grid item xs={12} md={6}>
-              <BasicCard
-                header={
-                  <Typography fontSize='16px' fontWeight='600' fontFamily='Open Sans' color='#226CE0'>
-                    Online Class
-                  </Typography>
-                }
-                content={
-                  <Box marginTop='-15px'>
-                      <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
-                        Video Title: {value.videoTitle}
-                      </Typography>
-                      <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
-                        Teacher: {value.teacher.firstName + ' ' + value.teacher.lastName} 
-                      </Typography>
-                      <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
-                        Chapter: {value.courseChapter}
-                      </Typography>
-                      <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' wrap>
-                        Link: <a href={value.youtubeLink}>{value.youtubeLink}</a>
-                      </Typography>
-                  </Box>
-                }
-              />
-              </Grid>
-            )
-            :
-            <h1>No Data</h1>
-          }
+          </form>
+          {data &&
+          <Grid container columnSpacing={{ xs: 1, md: 1 }} sx={{my: '0.5rem'}}>
+            {data.length > 0 ? 
+              data.map((value) => 
+                <Grid item xs={12} md={6}>
+                <BasicCard
+                  header={
+                    <Typography fontSize='16px' fontWeight='600' fontFamily='Open Sans' color='#226CE0'>
+                      Online Class
+                    </Typography>
+                  }
+                  content={
+                    <Box marginTop='-15px'>
+                        <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
+                          Video Title: {value.videoTitle}
+                        </Typography>
+                        <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
+                          Teacher: {value.teacher.firstName + ' ' + value.teacher.lastName} 
+                        </Typography>
+                        <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
+                          Chapter: {value.courseChapter}
+                        </Typography>
+                        <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' wrap>
+                          Link: <a href={value.youtubeLink}>{value.youtubeLink}</a>
+                        </Typography>
+                    </Box>
+                  }
+                />
+                </Grid>
+              )
+              :
+              <h1>No Data</h1>
+            }
           </Grid>
+          }
         </Container>    
     </div>
   )

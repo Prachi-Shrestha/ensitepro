@@ -118,7 +118,6 @@ else{
                                 <MenuItem value={value.id}>{value.name}</MenuItem>
                             )
                         }
-                        {console.log(subject)}
                     </SelectInput>
                 </Grid>
             </Grid>
