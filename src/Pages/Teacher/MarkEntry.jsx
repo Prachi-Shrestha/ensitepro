@@ -6,7 +6,7 @@ import SelectInput from '../../Components/Common/SelectInput';
 import axios from 'axios';
 import BasicCard from '../../Components/Common/BasicCard';
 
-const TeacherHomework = () => {
+const MarkEntry = () => {
     const [data, setData] = useState('')
     const [year, setYear] = useState('');
     const [yearData, setYearData] = useState([]);
@@ -82,25 +82,22 @@ const TeacherHomework = () => {
     }, [program, classId, group, year]);
 
     const addData = (e) => {
-      e.preventDefault()
-      const form = document.querySelector("form");
-        var bodyFormData = new FormData();
-        bodyFormData.append('academicYear', year);
-        bodyFormData.append('subjectGroup', group);
-        bodyFormData.append('program', program);
-        bodyFormData.append('classId', classId);
-        bodyFormData.append('subject', subject);
-        bodyFormData.append('homeWork', values.homeWork);
-        bodyFormData.append('homeworkDate', values.homeworkDate);
-        bodyFormData.append('homeworkTitle', values.homeworkTitle);
-        bodyFormData.append('photo', values.photo);
+        e.preventDefault()
         axios.post(
             `${process.env.REACT_APP_base_URL}/api/TeacherPanel/TeachersHomework`,
-            bodyFormData,
-            {   
-              headers: {
-                  'Authorization': 'Bearer ' + localStorage.getItem("token")
-              }, 
+            {
+                'academicYear': year, 
+                'subjectGroup': group,
+                'program': program, 
+                'classId': classId, 
+                'homeWork': values.homeWork, 
+                'homeworkDate': values.homeworkDate,
+                'homeworkTitle': values.homeworkTitle,   
+                'photo': values.photo,   
+            },
+            {   headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("token")
+                } 
             }
           )
           .then(response => {
@@ -258,4 +255,4 @@ const TeacherHomework = () => {
   )
 }
 
-export default TeacherHomework
+export default MarkEntry

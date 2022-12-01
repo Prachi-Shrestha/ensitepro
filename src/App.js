@@ -21,22 +21,40 @@ import Books from './Pages/Student/Books';
 import PreviousEducation from './Pages/Student/PreviousEducation';
 import TeacherOnlineClass from './Pages/Teacher/TeacherOnlineClass';
 import TeacherHomework from './Pages/Teacher/TeacherHomework';
+import HomeworkCheck from './Pages/Teacher/HomeworkCheck';
+import StudentAttendance from './Pages/Teacher/StudentAttendance';
+import UploadVideo from './Pages/Teacher/UploadVideo';
+import HomeworkSubmission from './Pages/Student/HomeworkSubmission';
+import MarkEntry from './Pages/Teacher/MarkEntry';
+import Check from './Pages/Teacher/Check';
+import { useState } from 'react'
+import { HomeworkCheckContext } from './Contexts/HomeworkCheckContext'
 
 function App() {
+  const [qna, setQna] = useState([])
+
   return (
     <div>
+      <HomeworkCheckContext.Provider value={[qna,setQna]}>
+        <Routes>
+          <Route path='/teacher/homeworkcheck' element={<HomeworkCheck/>}></Route>     
+          <Route path='/teacher/homeworkcheck/:id' element={<Check/>}></Route>     
+        </Routes>
+      </HomeworkCheckContext.Provider>
+
       <Routes>
-      <Route path='/' element={<HomePage/>}></Route>
+        <Route path='/' element={<HomePage/>}></Route>
         <Route path='/studentlogin' element={<StudentLogin/>}></Route>
         <Route path='/teacherlogin' element={<TeacherLogin/>}></Route>
         <Route path='/student' element={<Student/>}></Route>
         <Route path='/profile' element={<Profile/>}></Route>
-        <Route path='/homework' element={<Homework/>}></Route>
         <Route path='/onlineclass' element={<OnlineClass/>}></Route>
         <Route path='/notes' element={<Notes/>}></Route>
         <Route path='/books' element={<Books/>}></Route>
         <Route path='/routine' element={<Routine/>}></Route>
         <Route path='/attendance' element={<Attendance/>}></Route>
+        <Route path='/homework' element={<Homework/>}></Route>
+        <Route path='/homework/:id' element={<HomeworkSubmission/>}></Route>
         <Route path='/transportation' element={<Transportation/>}></Route>      
         <Route path='/coursevideo' element={<CourseVideo/>}></Route>
         <Route path='/previouseducation' element={<PreviousEducation/>}></Route>
@@ -45,9 +63,12 @@ function App() {
         <Route path='/creditfee' element={<CreditFee/>}></Route>
         <Route path='/gradesheet' element={<GradeSheet/>}></Route> 
         <Route path='/teacher' element={<Teacher/>}></Route>
-        <Route path='/teacheronlineclass' element={<TeacherOnlineClass/>}></Route>
+        <Route path='/teacher/onlineclass' element={<TeacherOnlineClass/>}></Route>
         <Route path='/news' element={<NewsDetail/>}></Route>     
-        <Route path='/teacherhomework' element={<TeacherHomework/>}></Route>     
+        <Route path='/teacher/homework' element={<TeacherHomework/>}></Route>     
+        <Route path='/teacher/studentattendance' element={<StudentAttendance/>}></Route>     
+        <Route path='/teacher/uploadvideo' element={<UploadVideo/>}></Route>     
+        <Route path='/teacher/markentry' element={<MarkEntry/>}></Route>     
       </Routes>    
     </div>
   );

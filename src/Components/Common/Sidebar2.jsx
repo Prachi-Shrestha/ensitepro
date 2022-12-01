@@ -73,21 +73,25 @@ function Sidebar2(props) {
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <img src={hw} alt="homework-icon"   />
-                </ListItemIcon>
-                <ListItemText>Homework</ListItemText>
-              </ListItemButton>
+              <Link to='/teacher/homework'>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <img src={hw} alt="homework-icon"   />
+                  </ListItemIcon>
+                  <ListItemText>Homework</ListItemText>
+                </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <img src={hw} alt="homework-icon"   />
-                </ListItemIcon>
-                <ListItemText>Homework Check</ListItemText>
-              </ListItemButton>
+              <Link to='/teacher/homeworkcheck'>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <img src={hw} alt="homework-icon"   />
+                  </ListItemIcon>
+                  <ListItemText>Homework Check</ListItemText>
+                </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>

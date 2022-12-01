@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import ArticleCarousel from "../Student/ArticleCarousel";
 import FeedbackForm from "../Student/FeedbackForm";
 import Header2 from "../../Components/Common/Header2";
@@ -27,6 +27,7 @@ else{
       <Highlights/>
       <ArticleCarousel/>
       <FeedbackForm/>
+      <Outlet/>
     </div>
   )
 }

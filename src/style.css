@@ -73,3 +73,6 @@ body{
 .inputFile .css-wgpvh3-MuiInputBase-root-MuiInput-root:before, .inputFile .css-wgpvh3-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled):before {
     border-bottom: none;
 }
+.linkBox{
+    text-decoration: none;
+}

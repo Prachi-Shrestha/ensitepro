@@ -22,7 +22,7 @@ function StudentLogin() {
     
     const loginApi = (e) => {
       e.preventDefault();
-        axios.post(`${process.env.REACT_APP_base_URL}StudentLogin`
+        axios.post(`${process.env.REACT_APP_base_URL}/StudentLogin`
         , {
             "userName": values.Username,
             "userPassword": values.password

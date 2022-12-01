@@ -89,15 +89,16 @@ else{
               <Button variant="contained" type='submit'>Search</Button>
             </Box>
           </form>
+          {data &&
           <Grid container columnSpacing={{ xs: 1, md: 1 }} sx={{my: '0.5rem'}}>
-            {data &&  data.length > 0 ? 
+            {data.length > 0 ?             
               data.map((value) => 
                 <Grid item xs={12} md={6}>
                 <BasicCard
                   header={
                     <Typography fontSize='16px' fontWeight='600' fontFamily='Open Sans' color='#226CE0'>
                       {value.vehicleName}
-                    </Typography>
+                    </Typography> 
                   }
                   content={
                     <Box marginTop='-15px'>
@@ -136,6 +137,7 @@ else{
               <h1>No Data</h1>
             }
           </Grid>
+        }
         </Container>   
     </div>
   )

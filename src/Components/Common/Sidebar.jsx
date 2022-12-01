@@ -33,8 +33,6 @@ import grade from '../../img/grade.png'
 import report from '../../img/Vector (4).png'
 
 function Sidebar(props) {
-
-  console.log(props.open);
   
   const handleDrawerClose = () => {
     props.setOpen(false);

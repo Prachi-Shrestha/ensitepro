@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate, Outlet } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import { Box, Container, Typography } from '@mui/material';
 import BasicCard from '../../Components/Common/BasicCard';
 import ComponentHeader from '../../Components/Common/ComponentHeader';
 import axios from 'axios';
 
-const Homework = (props) => {
+const Homework = () => {
 
   const [authenticated, setauthenticated] = useState(localStorage.getItem("authenticated"));
   const [hwData, setHwData] = useState('')
@@ -45,33 +45,35 @@ else{
       {hwData.length > 0 ? 
         hwData.map((value) => 
         <Grid item xs={12} md={6}>
-          <BasicCard
-            header={
-              <Typography fontSize='16px' fontWeight='600' fontFamily='Open Sans' color='#226CE0'>
-                {value.title}
-              </Typography>
-            }
-            content={
-              <Box display='flex' marginTop='-15px'>
-                <Box>
-                  {/* <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
-                    Subject: 
-                  </Typography> */}
-                  <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
-                    Teacher: {value.teacher} 
-                  </Typography>
-                  <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
-                    Teacher Remarks: {value.remark}
-                  </Typography>
+          <Link to={'/homework/' + value.id} className='linkBox'>
+            <BasicCard
+              header={
+                <Typography fontSize='16px' fontWeight='600' fontFamily='Open Sans' color='#226CE0'>
+                  {value.title}
+                </Typography>
+              }
+              content={
+                <Box display='flex' marginTop='-15px'>
+                  <Box>
+                    {/* <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
+                      Subject: 
+                    </Typography> */}
+                    <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
+                      Teacher: {value.teacher} 
+                    </Typography>
+                    <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
+                      Teacher Remarks: {value.remark}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' marginTop='25px' noWrap>
+                      Assigned Date: {value.homeworkDate}
+                    </Typography>
+                  </Box>
                 </Box>
-                <Box>
-                  <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' marginTop='25px' noWrap>
-                    Assigned Date: {value.homeworkDate}
-                  </Typography>
-                </Box>
-              </Box>
-            }
-          />
+              }
+            />
+          </Link>
         </Grid>
         )
         :
@@ -80,6 +82,7 @@ else{
     </Grid>
     }
     </Container>
+    <Outlet></Outlet>
     </div>
   );
 }

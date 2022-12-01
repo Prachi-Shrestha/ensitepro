@@ -10,40 +10,91 @@ import { Button, FormControl, Grid, InputLabel, TextField, Typography } from '@m
 import axios from 'axios';
 import LoginIcon from '@mui/icons-material/Login';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { FlareSharp } from '@mui/icons-material';
 
 function TeacherLogin() {
     const navigate = useNavigate();
-
-    const [authenticated, setauthenticated] = useState(
-        localStorage.getItem(localStorage.getItem("authenticated") || false)
-    );
 
     const[values, setValues] = React.useState({
         Username: '',
         password: '',
         showPassword: false,
     });
+
     const loginApi = (e) => {
         e.preventDefault();
-          axios.post(`${process.env.REACT_APP_base_URL}TeacherLogin`
+          axios.post(`${process.env.REACT_APP_base_URL}/TeacherLogin`
           , {
-              "userName": values.Username,
-              "userPassword": values.password
+              "userPassword": values.password,
+              "userName": values.Username
             }
         )
           .then(response => {
-            console.log(response);
-            localStorage.setItem("authenticated", true);
-            localStorage.setItem("token", response.data.token);
-            navigate("/teacher");
-            console.log(response);
+            if(response.data.error){
+              alert(response.data.error)
+            }
+            else{
+              localStorage.setItem("authenticated", true);
+              localStorage.setItem("token", response.data.token);
+              navigate("/teacher");
+              console.log(response);
+              getSubject(response.data);
+            }
           })
           .catch(error => {
             console.log(error);
           })
       }
+
+      function getSubject(data){
+        axios.get(
+          `${process.env.REACT_APP_base_URL}/api/Setup/SubjectGroup`,
+          {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          const groupData = response.data
+          localStorage.setItem("subjectGroup", JSON.stringify(groupData));
+        })
+        .catch(error => {
+          localStorage.setItem("subjectGroup",null);
+        })
+    
+        axios.get(
+          `${process.env.REACT_APP_base_URL}/api/Setup/ProgramMaster`,
+          {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          const programData = response.data
+          localStorage.setItem("programs", JSON.stringify(programData));
+        })
+        .catch(error => {
+          localStorage.setItem("program", null);
+        })
+  
+        axios.get(
+          `${process.env.REACT_APP_base_URL}/api/Setup/ClassMaster`,
+          {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          const classData = response.data
+          localStorage.setItem("classes", JSON.stringify(classData));
+        })
+        .catch(error => {
+          localStorage.setItem("class",null);
+        })
+      }
+
         const handleChange = (prop) => (event) => {
           setValues({ ...values, [prop]: event.target.value });
         };
