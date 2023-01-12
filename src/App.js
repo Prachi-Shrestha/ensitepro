@@ -26,22 +26,16 @@ import StudentAttendance from './Pages/Teacher/StudentAttendance';
 import UploadVideo from './Pages/Teacher/UploadVideo';
 import HomeworkSubmission from './Pages/Student/HomeworkSubmission';
 import MarkEntry from './Pages/Teacher/MarkEntry';
-import Check from './Pages/Teacher/Check';
-import { useState } from 'react'
-import { HomeworkCheckContext } from './Contexts/HomeworkCheckContext'
+import Calendar from './Pages/Student/Calendar';
+import TeacherCalendar from './Pages/Teacher/Calendar';
+import AddNotes from './Pages/Student/AddNotes';
+import NotesView from './Pages/Student/NotesView';
+import Notice from './Pages/Teacher/Notice';
 
 function App() {
-  const [qna, setQna] = useState([])
 
   return (
     <div>
-      <HomeworkCheckContext.Provider value={[qna,setQna]}>
-        <Routes>
-          <Route path='/teacher/homeworkcheck' element={<HomeworkCheck/>}></Route>     
-          <Route path='/teacher/homeworkcheck/:id' element={<Check/>}></Route>     
-        </Routes>
-      </HomeworkCheckContext.Provider>
-
       <Routes>
         <Route path='/' element={<HomePage/>}></Route>
         <Route path='/studentlogin' element={<StudentLogin/>}></Route>
@@ -50,8 +44,11 @@ function App() {
         <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/onlineclass' element={<OnlineClass/>}></Route>
         <Route path='/notes' element={<Notes/>}></Route>
+        <Route path='/notes/add' element={<AddNotes/>}></Route>
+        <Route path='/notes/:id' element={<NotesView/>}></Route>
         <Route path='/books' element={<Books/>}></Route>
         <Route path='/routine' element={<Routine/>}></Route>
+        <Route path='/calendar' element={<Calendar/>}></Route>
         <Route path='/attendance' element={<Attendance/>}></Route>
         <Route path='/homework' element={<Homework/>}></Route>
         <Route path='/homework/:id' element={<HomeworkSubmission/>}></Route>
@@ -64,11 +61,14 @@ function App() {
         <Route path='/gradesheet' element={<GradeSheet/>}></Route> 
         <Route path='/teacher' element={<Teacher/>}></Route>
         <Route path='/teacher/onlineclass' element={<TeacherOnlineClass/>}></Route>
+        <Route path='/teacher/homeworkcheck' element={<HomeworkCheck/>}></Route>   
+        <Route path='/teacher/calendar' element={<TeacherCalendar/>}></Route>
         <Route path='/news' element={<NewsDetail/>}></Route>     
         <Route path='/teacher/homework' element={<TeacherHomework/>}></Route>     
         <Route path='/teacher/studentattendance' element={<StudentAttendance/>}></Route>     
         <Route path='/teacher/uploadvideo' element={<UploadVideo/>}></Route>     
         <Route path='/teacher/markentry' element={<MarkEntry/>}></Route>     
+        <Route path='/teacher/notice' element={<Notice/>}></Route>     
       </Routes>    
     </div>
   );

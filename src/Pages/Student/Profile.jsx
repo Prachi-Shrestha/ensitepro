@@ -3,10 +3,9 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { Avatar, Button, Container, Divider, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom';
 import ComponentHeader from '../../Components/Common/ComponentHeader'
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { Box } from '@mui/system';
+import axios from 'axios';
 
 const LinkBehavior = React.forwardRef((props, ref) => (
   <RouterLink ref={ref} to="/" {...props} role={undefined} />
@@ -28,6 +27,8 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const [authenticated, setauthenticated] = useState(localStorage.getItem("authenticated"));
+  const [data, setData] = useState([])
+
   useEffect(() => {
     const loggedInUser = localStorage.getItem("authenticated");
     if (loggedInUser) {
@@ -35,13 +36,30 @@ const Profile = () => {
     }
   }, []);
 
+  useEffect(() => {
+    console.log(process.env);
+    axios.get(
+      `${process.env.REACT_APP_base_URL}/rest/Student/Information`,
+      {headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token")
+      }}
+    )
+    .then(response => {
+      setData(response.data);
+      console.log(response.data);
+    })
+    .catch(error => {
+      setData(null);
+    })
+  },[]);
+
   const logout = (e) => {
     e.preventDefault();
     console.log('Logout');
     localStorage.clear();
     sessionStorage.clear();
     navigate("/");  
-}
+  }
 
 if(!authenticated){
   return <Navigate replace to ='/'></Navigate>
@@ -53,9 +71,9 @@ else{
         <ComponentHeader title='Profile'/>
         <Container>
             <Box sx= {cardStyles.card}>   
-            <Avatar sx={{ width: '89px', height: '89px', border: '3px solid #226CE0' }} src="https://avatars.githubusercontent.com/u/86892846?v=4" alt="" />
-            <Typography sx={{lineHeight: '75px', fontWeight: 600}}> SHIKHAR POKHAREL </Typography>
-            <Button variant="outlined" component={RouterLink} to="/information" sx={{color: 'black'}}> View Profile </Button>
+              <Avatar sx={{ width: '89px', height: '89px', border: '3px solid #226CE0' }} src={data.photo ? data.photo : 'noimage.png'} alt="" />
+              <Typography sx={{lineHeight: '75px', fontWeight: 600}}> {data.stuName} </Typography>
+              <Button variant="outlined" component={RouterLink} to="/information" sx={{color: 'black'}}> View Profile </Button>
             </Box>
         </Container>
         <Container>
@@ -64,27 +82,9 @@ else{
             <ListItem disablePadding>   
                 <ListItemButton>
                   <ListItemIcon>
-                    <SettingsOutlinedIcon/>
-                  </ListItemIcon>
-                  <ListItemText> Settings </ListItemText>
-                </ListItemButton>
-            </ListItem>
-            <Divider/>
-            <ListItem disablePadding>   
-                <ListItemButton>
-                  <ListItemIcon>
-                    <HelpOutlineOutlinedIcon/>
-                  </ListItemIcon>
-                  <ListItemText> Help & Support </ListItemText>
-                </ListItemButton>
-            </ListItem>
-            <Divider/>
-            <ListItem disablePadding>   
-                <ListItemButton>
-                  <ListItemIcon>
                     <ExitToAppIcon/>
                   </ListItemIcon>
-                  <ListItemText onClick={logout}> Logout </ListItemText>
+                  <ListItemText onClick={logout}> Logout </ListItemText> 
                 </ListItemButton>
             </ListItem>
             </List>

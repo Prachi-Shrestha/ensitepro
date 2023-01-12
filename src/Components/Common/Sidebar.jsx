@@ -12,7 +12,7 @@ import {
     ListItemText,
     Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight } from "@mui/icons-material";
 import user from '../../img/avatar.png'
 import home from '../../img/Vector (3).png'
@@ -31,12 +31,23 @@ import paid from '../../img/payment 1.png'
 import credit from '../../img/Layer 2.png'
 import grade from '../../img/grade.png'
 import report from '../../img/Vector (4).png'
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 function Sidebar(props) {
   
   const handleDrawerClose = () => {
     props.setOpen(false);
   };
+
+  const navigate = useNavigate();
+
+  const logout = (e) => {
+    e.preventDefault();
+    console.log('Logout');
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/");  
+  }
 
   const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -152,12 +163,14 @@ function Sidebar(props) {
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <img src={calendar} alt="calendar-icon"   />
-                </ListItemIcon>
-                <ListItemText>Calendar</ListItemText>
-              </ListItemButton>
+              <Link to='/calendar'>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <img src={calendar} alt="calendar-icon"   />
+                  </ListItemIcon>
+                  <ListItemText>Calendar</ListItemText>
+                </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
@@ -240,13 +253,13 @@ function Sidebar(props) {
             <ListItem disablePadding sx={{ py: '1.5rem'}}>
               <ListItemButton>
                 <ListItemIcon>
-                  <img src={report} alt="report-icon"   />
+                  <ExitToAppIcon sx={{ color: '#226CE0' }}/>
                 </ListItemIcon>
-                <ListItemText>Report a Problem</ListItemText>
+                <ListItemText onClick={logout}> Logout </ListItemText> 
               </ListItemButton>
             </ListItem>
             <ListItem sx={{px: '0rem'}}>
-              <img src="ensite_logo_SVG.svg" alt="ensite-logo" />
+              <img src="../.././ensite_logo_SVG.svg" alt="ensite-logo" />
               <ListItemText className="product" sx={{pl: '1rem'}}>A product of Digital & Beyond</ListItemText>
             </ListItem>
         </List>

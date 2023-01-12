@@ -34,10 +34,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData( date, status, InTime, OutTime) {
-  return {date, status, InTime, OutTime };
-}
-
 export const Attendance = () => {
   const [authenticated, setauthenticated] = useState(localStorage.getItem("authenticated"));
   const [data, setData] = useState('')
@@ -65,6 +61,7 @@ export const Attendance = () => {
     })
 
   }, []);
+  
   {data && data.map((day) => 
     day.status === 'Y' ?
       present= present + 1 : day.status === 'N' ? absent= absent + 1 : ''           
@@ -78,20 +75,6 @@ else{
   return (
     <div>
         <ComponentHeader title='Attendance'/>
-        {/* <Container>
-            <Grid container spacing={2} sx={{my: '0.5rem'}}>
-            <Grid item xs={12} md={6}>
-                    <SelectInput label='Year' id='select-year'>
-                        <MenuItem value={10}>Ten</MenuItem>
-                    </SelectInput>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <SelectInput label='Month' id='select-month'>
-                        <MenuItem value={10}>Twen</MenuItem>
-                    </SelectInput>
-                </Grid>
-            </Grid>
-        </Container> */}
         <Container>
           <Box backgroundColor='white' padding= '5px'>
             <Stack direction="row" justifyContent="center" spacing={5}>
@@ -102,30 +85,30 @@ else{
           </Box>
         </Container>
       <Box>
-      <br/>
-      <TableContainer component={Paper}>
-      <Table sx={{ width: '100%' }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center">Date</StyledTableCell>
-            <StyledTableCell align="center">Status</StyledTableCell>
-            <StyledTableCell align="center">In Time</StyledTableCell>
-            <StyledTableCell align="center">Out Time</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data && data.map((row) => (
-            <StyledTableRow>
-              <StyledTableCell align="center">{row.date}</StyledTableCell>
-              <StyledTableCell align="center">{row.status}</StyledTableCell>
-              <StyledTableCell align="center">{row.inTime}</StyledTableCell>
-              <StyledTableCell align="center">{row.outTime}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </Box>
+        <br/>
+        <TableContainer component={Paper}>
+          <Table sx={{ width: '100%' }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell align="center">Date</StyledTableCell>
+                <StyledTableCell align="center">Status</StyledTableCell>
+                <StyledTableCell align="center">In Time</StyledTableCell>
+                <StyledTableCell align="center">Out Time</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data && data.map((row) => (
+                <StyledTableRow>
+                  <StyledTableCell align="center">{row.date}</StyledTableCell>
+                  <StyledTableCell align="center">{row.status}</StyledTableCell>
+                  <StyledTableCell align="center">{row.inTime}</StyledTableCell>
+                  <StyledTableCell align="center">{row.outTime}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
     </div>
   );
   }

@@ -76,3 +76,8 @@ body{
 .linkBox{
     text-decoration: none;
 }
+.notesCard{
+    background-color: #DCDCDC !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}

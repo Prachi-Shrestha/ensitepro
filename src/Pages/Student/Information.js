@@ -19,11 +19,16 @@ const cardStyles ={
 };
 
 const Information = () => {
-
+  const [authenticated, setauthenticated] = useState(localStorage.getItem("authenticated"));
   const [data, setData] = useState([])
 
   useEffect(() => {
-    console.log(process.env);
+    
+    const loggedInUser = localStorage.getItem("authenticated");
+    if (loggedInUser) {
+      setauthenticated(loggedInUser);
+    }
+
     axios.get(
       `${process.env.REACT_APP_base_URL}/rest/Student/Information`,
       {headers: {
@@ -45,7 +50,7 @@ const Information = () => {
       <ComponentHeader title='Information'/>
       <Container>
         <Grid sx={cardStyles.card}>   
-          <Avatar sx={{ width: '89px', height: '89px', border: '3px solid #226CE0' }} src="https://avatars.githubusercontent.com/u/86892846?v=4" alt="" />
+          <Avatar sx={{ width: '89px', height: '89px', border: '3px solid #226CE0' }} src={data.photo ? data.photo : 'noimage.png'} alt="" />
           <Typography sx={{lineHeight: '75px', fontWeight: 600}}> {data.stuName} </Typography>
           <Grid
             container

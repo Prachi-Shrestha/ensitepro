@@ -55,9 +55,9 @@ else{
               content={
                 <Box display='flex' marginTop='-15px'>
                   <Box>
-                    {/* <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
-                      Subject: 
-                    </Typography> */}
+                    <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
+                      Subject: {value.subName}
+                    </Typography>
                     <Typography variant='subtitle1' fontSize='12px' gutterBottom fontWeight='600' noWrap>
                       Teacher: {value.teacher} 
                     </Typography>

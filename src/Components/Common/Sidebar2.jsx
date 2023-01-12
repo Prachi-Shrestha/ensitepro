@@ -12,7 +12,7 @@ import {
     ListItemText,
     Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight } from "@mui/icons-material";
 import user from '../../img/avatar.png'
 import home from '../../img/Vector (3).png'
@@ -23,13 +23,23 @@ import calendar from '../../img/ant-design_calendar-outlined.png'
 import course from '../../img/ep_video-play.png'
 import notice from '../../img/Board Presentation.png'
 import mark from '../../img/emojione-v1_heavy-check-mark.png'
-import report from '../../img/Vector (4).png'
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 function Sidebar2(props) {
     
   const handleDrawerClose = () => {
     props.setOpen(false);
   };
+
+  const navigate = useNavigate();
+
+  const logout = (e) => {
+    e.preventDefault();
+    console.log('Logout');
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/");  
+  }
 
   const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -66,7 +76,7 @@ function Sidebar2(props) {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <img src={home} alt="home-icon"   />
+                  <img src={home} alt="home-icon" />
                 </ListItemIcon>
                 <ListItemText>Home</ListItemText>
               </ListItemButton>
@@ -76,7 +86,7 @@ function Sidebar2(props) {
               <Link to='/teacher/homework'>
                 <ListItemButton>
                   <ListItemIcon>
-                    <img src={hw} alt="homework-icon"   />
+                    <img src={hw} alt="homework-icon" />
                   </ListItemIcon>
                   <ListItemText>Homework</ListItemText>
                 </ListItemButton>
@@ -87,7 +97,7 @@ function Sidebar2(props) {
               <Link to='/teacher/homeworkcheck'>
                 <ListItemButton>
                   <ListItemIcon>
-                    <img src={hw} alt="homework-icon"   />
+                    <img src={hw} alt="homework-icon" />
                   </ListItemIcon>
                   <ListItemText>Homework Check</ListItemText>
                 </ListItemButton>
@@ -95,10 +105,10 @@ function Sidebar2(props) {
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
-              <Link to='/teacheronlineclass'>
+              <Link to='/teacher/onlineclass'>
                 <ListItemButton>
                     <ListItemIcon>
-                    <img src={video} alt="online-icon"   />
+                    <img src={video} alt="online-icon" />
                     </ListItemIcon>
                     <ListItemText>Online Class</ListItemText>
                 </ListItemButton>
@@ -106,60 +116,70 @@ function Sidebar2(props) {
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <img src={attendance} alt="attendance-icon"   />
-                </ListItemIcon>
-                <ListItemText>Student Attendance</ListItemText>
-              </ListItemButton>
+              <Link to='/teacher/studentattendance'>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <img src={attendance} alt="attendance-icon" />
+                  </ListItemIcon>
+                  <ListItemText>Student Attendance</ListItemText>
+                </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <img src={calendar} alt="calendar-icon"   />
-                </ListItemIcon>
-                <ListItemText>Calendar</ListItemText>
-              </ListItemButton>
+              <Link to='/teacher/calendar'>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <img src={calendar} alt="calendar-icon" />
+                  </ListItemIcon>
+                  <ListItemText>Calendar</ListItemText>
+                </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <img src={course} alt="upload-icon"   />
-                </ListItemIcon>
-                <ListItemText>Upload Video</ListItemText>
-              </ListItemButton>
+              <Link to='/teacher/uploadvideo'>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <img src={course} alt="upload-icon" />
+                  </ListItemIcon>
+                  <ListItemText>Upload Video</ListItemText>
+                </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <img src={notice} alt="notice-icon"   />
-                </ListItemIcon>
-                <ListItemText>Notice Board</ListItemText>
-              </ListItemButton>
+              <Link to='/teacher/notice'>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <img src={notice} alt="notice-icon" />
+                  </ListItemIcon>
+                  <ListItemText>Notice Board</ListItemText>
+                </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <img src={mark} alt="mark-icon"   />
-                </ListItemIcon>
-                <ListItemText>Mark Entry</ListItemText>
-              </ListItemButton>
+              <Link to='/teacher/markentry'>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <img src={mark} alt="mark-icon" />
+                  </ListItemIcon>
+                  <ListItemText>Mark Entry</ListItemText>
+                </ListItemButton>
+              </Link>
             </ListItem>
             <Divider/>
             <ListItem disablePadding sx={{ py: '1.5rem'}}>
               <ListItemButton>
                 <ListItemIcon>
-                  <img src={report} alt="report-icon"   />
+                  <ExitToAppIcon sx={{ color: '#226CE0' }}/>
                 </ListItemIcon>
-                <ListItemText>Report a Problem</ListItemText>
+                <ListItemText onClick={logout}> Logout </ListItemText> 
               </ListItemButton>
             </ListItem>
             <ListItem sx={{px: '0rem'}}>
-              <img src="ensite_logo_SVG.svg" alt="ensite-logo" />
+              <img src="./../ensite_logo_SVG.svg" alt="ensite-logo" />
               <ListItemText className="product" sx={{pl: '1rem'}}>A product of Digital & Beyond</ListItemText>
             </ListItem>
         </List>

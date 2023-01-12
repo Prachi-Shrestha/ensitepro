@@ -19,6 +19,7 @@ const HomeworkCheck = () => {
     const [subject, setSubject] = useState('');
     const [show, setShow] = useState(false);
     const [regId, setRegId] = useState(false);
+    const [date, setDate] = useState(false);
     
     const [values, setValues] = React.useState({
         checked: '',
@@ -30,7 +31,7 @@ const HomeworkCheck = () => {
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
-      };
+    };
 
     const showCheck = (id) => {
         setHomeworkId(id);
@@ -43,6 +44,7 @@ const HomeworkCheck = () => {
                     remarks: value.remarks
                 })
                 setRegId(value.regNo)
+                setDate(value.homeworkDate)
             }
         })
     }
@@ -105,22 +107,18 @@ const HomeworkCheck = () => {
 
     const checked = (e) => {
         e.preventDefault()
-        // const form = document.querySelector("form");
-        // var bodyFormData = new FormData();
-        // bodyFormData.append('checkDate', values.checked);
-        // bodyFormData.append('homework', values.photo);
-        // bodyFormData.append('remark', values.remarks);
-        // bodyFormData.append('stuId', regId);
         axios.post(
         `${process.env.REACT_APP_base_URL}/api/TeacherPanel/TeachersHomework/HomeworkCheck`,    
-        // bodyFormData    
         {
-            'checkDate': values.checked,
-            'homework': values.photo,
-            'remark': values.remarks,
-            'stuId': regId
-        }
-        ,
+            "pk": {
+              "stuId": regId,
+              "homework": homeworkId,
+            },
+            "homework": homeworkId,
+            "answer": values.answer,
+            "checkDate": values.checked,
+            "remark": values.remarks,
+          },
         {   
             headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("token")
@@ -299,7 +297,7 @@ const HomeworkCheck = () => {
                                 onChange={handleChange('checked')}
                             />
                             <Box textAlign='center' paddingTop= '40px'>
-                                <Button variant='contained' sx={{textTransform: 'none'}} type='submit'> Search </Button>
+                                <Button variant='contained' sx={{textTransform: 'none'}} type='submit'> Check </Button>
                             </Box> 
                         </form>
                     </Container>
